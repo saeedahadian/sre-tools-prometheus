@@ -1,0 +1,83 @@
+# my global config
+global:
+  scrape_interval: 15s
+  evaluation_interval: 30s
+
+rule_files:
+  #- "first.rules"
+  #- "my/*.rules"
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: gpu
+    static_configs:
+      - targets:
+        - 10.2.17.14:9100   # node-exporter
+        - 10.2.17.14:9101   # cadvisor-exporter
+        - 10.2.17.14:9102   # nvidia-exporter
+
+  - job_name: data
+    static_configs:
+      - targets:
+        - 10.1.20.6:9100    # node-exporter
+        - 10.1.20.6:9101    # cadvisor-exporter
+
+  - job_name: qa
+    static_configs:
+      - targets:
+        - 10.1.16.24:9100    # node-exporter
+        - 10.1.16.24:9101    # cadvisor-exporter
+        - 10.1.17.9:9100    # node-exporter
+        - 10.1.17.9:9101    # cadvisor-exporter
+
+  - job_name: kyc
+    static_configs:
+      - targets:
+        - 192.168.106.242:9100    # node-exporter
+        - 192.168.106.242:9101    # cadvisor-exporter
+        - 192.168.106.243:9100    # node-exporter
+        - 192.168.106.243:9101    # cadvisor-exporter
+        - 172.23.158.1:9100    # node-exporter
+        - 172.23.158.1:9101    # cadvisor-exporter
+        - 172.23.32.1:9100    # node-exporter
+        - 172.23.32.1:9101    # cadvisor-exporter
+
+  - job_name: chatbot
+    static_configs:
+      - targets:
+        - 10.1.16.25:9100    # node-exporter
+        - 10.1.16.25:9101    # cadvisor-exporter
+        - 10.1.51.2:9100    # node-exporter
+        - 10.1.51.2:9101    # cadvisor-exporter
+
+  - job_name: rocketchat
+    static_configs:
+    - targets:
+      - 10.1.16.14:9200    # rocketchat-exporter
+      - 10.1.16.14:9201    # traefik-exporter
+      - 10.1.16.14:9100    # node-exporter
+      - 10.1.16.14:9101    # cadvisor-exporter
+
+  - job_name: asr
+    static_configs:
+      - targets:
+        - 10.1.17.1:9100    # node-exporter
+        - 10.1.17.1:9101    # cadvisor-exporter
+        - 10.1.17.2:9100    # node-exporter
+        - 10.1.17.2:9101    # cadvisor-exporter
+
+  - job_name: monitoring
+    static_configs:
+      - targets:
+        - 10.1.19.1:9100    # node-exporter
+        - 10.1.19.1:9101    # cadvisor-exporter
+        - 10.1.19.1:9995    # disk-usage-exporter
+
+  - job_name: labeler
+    static_configs:
+      - targets:
+        - 10.1.17.10:9100    # node-exporter
+        - 10.1.17.10:9101    # cadvisor-exporter

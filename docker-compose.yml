@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: unless-stopped
+    ports:
+      - 9090:9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=12w
+      - --storage.tsdb.retention.size=70GB
+      - --enable-feature=promql-at-modifier
+      - --enable-feature=promql-negative-offset
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      - prometheus_net
+
+volumes:
+  prometheus_data:
+    name: prometheus_data
+    driver: local
+
+networks:
+  prometheus_net:
+    name: prometheus_net

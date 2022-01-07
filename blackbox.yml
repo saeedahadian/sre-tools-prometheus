@@ -1,0 +1,15 @@
+modules:
+  http_2xx:
+    prober: http
+    http:
+      preferred_ip_protocol: ip4
+      ip_protocol_fallback: true
+      follow_redirects: true
+  http_post_2x:
+    prober: http
+    http:
+      method: POST
+  tcp_connect:
+    prober: tcp
+  icmp:
+    prober: icmp
